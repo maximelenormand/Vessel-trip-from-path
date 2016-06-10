@@ -49,7 +49,7 @@ The algorithm returns a 9 columns csv file with column names, **the value separa
 
 You can run the code using the command:
 
-*python vesselTrajectories.py 'input.csv' 'output.csv' 4000 36000* 
+*python VesselTrajectories.py 'input.csv' 'output.csv' 4000 36000* 
 
 ## Citation
 
