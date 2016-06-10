@@ -43,7 +43,7 @@ The algorithm returns a 9 columns csv file with column names, **the value separa
 6. **DistLand:** Distance from the nearest land (in meters)  
 7. **Delta_t:** Time ellapsed between the last and the current location (in seconds) 
 8. **Delta_d:** Distance traveled between the last and the current location (in meters)
-9. **Theta:**  Angle between the last, the current and the next location (in degrees) 
+9. **Theta:**  Turning angle based on the change of direction between the last, the current and the next position (in degree). Negative for left and positive for right.
 
 ## Execution
 
