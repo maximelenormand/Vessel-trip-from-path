@@ -34,7 +34,8 @@ The algorithm returns a 9 columns csv file with column names (the value separato
 	6. DistLand: Distance from the nearest land (in meters)
 	7. Delta_t: Time ellapsed between the last and the current location (in seconds)
 	8. Delta_d: Distance traveled between the last and the current location (in meters)
-	9. Theta: Angle between the last, the current and the next location (in degree)      
+	9. Theta: Turning angle based on the change of direction between the last, the current and the next position (in degree). 
+                Negative for left and positive for right.      
 
 Copyright 2016 Maxime Lenormand. All rights reserved. Code under License GPLv3.
 """
@@ -207,11 +208,10 @@ for line in input_file:
                        output_file.write(str(0))     
                        output_file.write('\n')
                    else:
-                       #Compute interevent time and distance                                                            
-                       a = math.sqrt((X[i]-X[(i-1)])**2+(Y[i]-Y[(i-1)])**2)                               
+                       #Compute interevent time and distance                                                                                       
                        output_file.write(str(T[i] - T[(i-1)]))
                        output_file.write(';')
-                       output_file.write(str(a))
+                       output_file.write(str(math.sqrt((X[i]-X[(i-1)])**2+(Y[i]-Y[(i-1)])**2) ))
                        output_file.write(';')
     
                        if i==(len(T)-1):
@@ -219,18 +219,30 @@ for line in input_file:
                            output_file.write('\n')
                        #Compute angle    
                        else:
-                           b = math.sqrt((X[i]-X[(i+1)])**2+(Y[i]-Y[(i+1)])**2)
-                           c = math.sqrt((X[(i-1)]-X[(i+1)])**2+(Y[(i-1)]-Y[(i+1)])**2)
-                           if(a==0 or b==0):
+                           #Coordinate and norm vector a and b
+                           Xa = X[i]-X[(i+1)]
+                           Ya = Y[i]-Y[(i+1)]          
+                           Xb = X[i]-X[(i-1)]
+                           Yb = Y[i]-Y[(i-1)]
+                           Na = math.sqrt(Xa**2+Ya**2);
+                           Nb = math.sqrt(Xb**2+Yb**2);
+                           
+                           #If same position
+                           if(Na==0 or Nb==0):
                                output_file.write(str(0))
-                           else:
-                               cos = (a**2 + b**2 - c**2)/(2*a*b)
+                           else:    
+                               cos = (Xa*Xb+Ya*Yb)/(Na*Nb)
                                if cos < -1:
                                    cos = -1
                                if cos >1:
                                    cos = 1
-                               output_file.write(str(math.acos(cos)*(180./math.pi)))
-                           output_file.write('\n')   
+                                   
+                               sin = (Xa*Yb-Ya*Xb)
+                               if sin < 0:
+                                   output_file.write(str(180-math.acos(cos)*(180./math.pi)))
+                               else:
+                                   output_file.write(str(-180+math.acos(cos)*(180./math.pi)))
+                           output_file.write('\n')  
        
        #Update test value
        test_t_old = test_t
