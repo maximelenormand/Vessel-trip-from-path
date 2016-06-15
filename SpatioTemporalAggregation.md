@@ -4,6 +4,8 @@ Spatio-temporal aggregation of vessels' trips
  Copyright 2016 Maxime Lenormand. All rights reserved. Code under License GPLv3.
 ______________________________________________________________________________________
 
+## Description
+
 The aim of this script is to spatially aggregate a vessel trip over a spatial distribution of polygons according to a simplified trajectory. A trip is composed of exact spatio-temporal positions (T, X, Y) spatially included in a spatial polygon. A trip can also be simplified with a Ramer–Douglas–Peucker algorithm for example. In this case only polygons containing at least one position in the simplified trip will be considered.  
  
 All the positions successively located in the same polygon are aggregated into one single aggregate position (i.e. polygon). All the positions' attributes are averaged over the different positions. The time spent into the polygon is equal to the ellapsed between the arrival time and departure time from the polygon. The arrival time is approximated by the time between the first position in the polygon and the previous one. The departure time is approximated by the time between the last position in the polygon and the next one. 
