@@ -39,8 +39,8 @@ The algorithm returns a 9 columns csv file with column names, **the value separa
 1. **ID of the vessel**
 2. **ID of the trip**
 3. **Unix Time**
-4. **X cartesian coordinate**
-5. **Y cartesian coordinate**
+4. **X:** cartesian coordinate (in meters) 
+5. **Y:** cartesian coordinate (in meters) 
 6. **DistLand:** Distance from the nearest land (in meters)  
 7. **Delta_t:** Time ellapsed between the last and the current position (in seconds) 
 8. **Delta_d:** Distance traveled between the last and the current position (in meters)
