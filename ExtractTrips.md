@@ -18,8 +18,8 @@ It is important to note that the table must be **SORTED** by ID and by time.
 
 1. **Vessel ID**
 2. **Unix Time**
-3. **X cartesian coordinate**
-4. **Y cartesian coordinate**
+3. **X:** cartesian coordinate (in meters) 
+4. **Y:** cartesian coordinate (in meters) 
 5. **DistLand:** Distance from the nearest land (in meters) 
 
 ## Parameters
