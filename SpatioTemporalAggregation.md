@@ -1,64 +1,47 @@
-Extract fishing trips from spatio-temporal vessels' trajectories
+Spatio-temporal aggregation of vessels' trips
 ========================================================================
 
  Copyright 2016 Maxime Lenormand. All rights reserved. Code under License GPLv3.
 ______________________________________________________________________________________
 
-This script divides the spatio-temporal trajectory of a vessel into trips based on the following definition:
-
-"A trip is composed of at least three successive positions being farther than *thd* meters from the coast 
-and separated by inverevent times lower than *tht* seconds."
+The aim of this script is to spatially aggregate a vessel trip over a spatial distribution of polygons according to a simplified trajectory. A trip is composed of exact spatio-temporal positions (T, X, Y) spatially included in a spatial polygon. A trip can also be simplified with a Ramer–Douglas–Peucker algorithm for example. In this case only polygons containing at least one position in the simplified trip will be considered.  
+ 
+All the position successively located in the same polygon are aggregated into one single position (i.e. polygon). All the 
+positions' attributes are averaged over the different positions. The time spent into the polygon is equal to the ellapsed between the arrival time and departure time from the polygon. The arrival time is approximated by the time between the first position in the polygon and the previous one. The departure time is approximated by the time between the last position in the polygon and the next one. 
 
 ## Input
 
-The algorithm takes as input a 5 columns csv file with column names, **the value separator is a semicolon ";"**.
-Each row of the file represents a spatio-temporal position of a vessel's trajectory. 
+The algorithm takes as input a 8 columns csv file with column names (the value separator is a semicolon ";"). Each row of the file represents a spatio-temporal position of a vessel's trip. 
 
-It is important to note that the table must be **SORTED** by ID and by time.
+It is important to note that the table must be SORTED by Trip ID and by time, each trip should be composed of at least 3 positions.
 
-1. **ID of the vessel**
+1. **Trip ID**
 2. **Unix Time**
-3. **X cartesian coordinate**
-4. **Y cartesian coordinate**
+3. **X:** cartesian coordinate (in meters)
+4. **Y:** cartesian coordinate (in meters)
 5. **DistLand:** Distance from the nearest land (in meters) 
+6. **Speed** (in meter/second)
+7. **Simplified:** 1 if the position is on a simplified trip, 0 otherwise
+8. **Polygon ID**
 
 ## Parameters
  
-The algorithm has 4 parameters:
+The algorithm has 2 parameters:
 
-1. **wdinput:**  Path of the input file (ex: "input.csv")
-2. **wdoutput:** Path of the output file (ex: "outputoftheawsomemaximelenormandsalgorithm.csv")
-3. **thd:** Distance threshold (in meters)
-4. **tht:** Time threshold (in seconds)
+1. **wdinput:**  Path of the input file
+2. **wdoutput:** Path of the output file
 
 ## Output
 
-The algorithm returns a 9 columns csv file with column names, **the value separator is a semicolon ";"**. 
+The algorithm returns a 10 columns csv file with column names, **the value separator is a semicolon ";"**. Each row of the file represents a spatio-temporal aggregate position of a vessel's simplified trip. 
 
-1. **ID of the vessel**
-2. **ID of the trip**
+1. **Trip ID**
+2. **Polygon ID**
 3. **Unix Time**
-4. **X cartesian coordinate**
-5. **Y cartesian coordinate**
+4. **X:** cartesian coordinate (in meters)
+5. **Y:** cartesian coordinate (in meters)
 6. **DistLand:** Distance from the nearest land (in meters)  
-7. **Delta_t:** Time ellapsed between the last and the current location (in seconds) 
-8. **Delta_d:** Distance traveled between the last and the current location (in meters)
-9. **Theta:**  Turning angle based on the change of direction between the last, the current and the next position (in degree). Negative for left and positive for right.
-
-## Execution
-
-You can run the code using the command:
-
-*python VesselTrajectories.py input.csv output.csv 4000 36000* 
-
-## Citation
-
-If you use this code, please cite:
-
-
-
-If you need help, find a bug, want to give me advice or feedback, please contact me!
-You can reach me at maxime.lenormand[at]irstea.fr
-
-## References
-
+7. **Delta_t:** Time ellapsed between the last and the current aggregate position (in seconds)
+8. **Delta_d:** Distance traveled between the last and the current aggregate position (in meters)
+9. **Theta:**  Turning angle based on the change of direction between the last, the current and the aggregate position (in degree). Negative for left and positive for right.
+10. **Time:** Time spent in the polygon (in seconds) 
