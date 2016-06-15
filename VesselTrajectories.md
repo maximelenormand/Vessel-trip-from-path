@@ -16,7 +16,7 @@ Each row of the file represents a spatio-temporal position of a vessel's traject
 
 It is important to note that the table must be **SORTED** by ID and by time.
 
-1. **ID of the vessel**
+1. **Vessel ID**
 2. **Unix Time**
 3. **X cartesian coordinate**
 4. **Y cartesian coordinate**
@@ -24,12 +24,13 @@ It is important to note that the table must be **SORTED** by ID and by time.
 
 ## Parameters
  
-The algorithm has 4 parameters:
+The algorithm has 5 parameters:
 
-1. **wdinput:**  Path of the input file (ex: "input.csv")
-2. **wdoutput:** Path of the output file (ex: "outputoftheawsomemaximelenormandsalgorithm.csv")
+1. **wdinput:**  Path of the input file
+2. **wdoutput:** Path of the output file
 3. **thd:** Distance threshold (in meters)
 4. **tht:** Time threshold (in seconds)
+5. **epsilon:** maximum distance (in meters) between the simplified trajectory and the original one (Ramer–Douglas–Peucker algorithm)
 
 ## Output
 
@@ -41,24 +42,7 @@ The algorithm returns a 9 columns csv file with column names, **the value separa
 4. **X cartesian coordinate**
 5. **Y cartesian coordinate**
 6. **DistLand:** Distance from the nearest land (in meters)  
-7. **Delta_t:** Time ellapsed between the last and the current location (in seconds) 
-8. **Delta_d:** Distance traveled between the last and the current location (in meters)
+7. **Delta_t:** Time ellapsed between the last and the current position (in seconds) 
+8. **Delta_d:** Distance traveled between the last and the current position (in meters)
 9. **Theta:**  Turning angle based on the change of direction between the last, the current and the next position (in degree). Negative for left and positive for right.
-
-## Execution
-
-You can run the code using the command:
-
-*python VesselTrajectories.py input.csv output.csv 4000 36000* 
-
-## Citation
-
-If you use this code, please cite:
-
-
-
-If you need help, find a bug, want to give me advice or feedback, please contact me!
-You can reach me at maxime.lenormand[at]irstea.fr
-
-## References
-
+10. **Simplified:** 1 if the position is on the simplified trajectory (Ramer–Douglas–Peucker algorithm), 0 otherwise
