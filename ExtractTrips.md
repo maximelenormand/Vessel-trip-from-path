@@ -4,6 +4,8 @@ Extract fishing trips from spatio-temporal vessels' trajectories
  Copyright 2016 Maxime Lenormand. All rights reserved. Code under License GPLv3.
 ______________________________________________________________________________________
 
+## Description
+
 This script divides spatio-temporal vessels's trajectories into trips based on the following definition:
 
 "A trip is composed of at least three successive positions being farther than ***thd*** meters from the coast 
