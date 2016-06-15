@@ -6,8 +6,8 @@ ________________________________________________________________________________
 
 This script divides spatio-temporal vessels's trajectories into trips based on the following definition:
 
-"A trip is composed of at least three successive positions being farther than *thd* meters from the coast 
-and separated by inverevent times lower than *tht* seconds."
+"A trip is composed of at least three successive positions being farther than ***thd*** meters from the coast 
+and separated by inverevent times lower than ***tht*** seconds."
 
 ## Input
 
