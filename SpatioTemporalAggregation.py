@@ -8,13 +8,13 @@ trajectory. A trip is composed of exact spatio-temporal positions (T, X, Y) spat
 be simplified with a Ramer–Douglas–Peucker algorithm for example. In this case only polygons containing at least one position in the 
 simplified trip will be considered.  
  
-All the position successively located in the same polygon are aggregated into one single position (i.e. polygon). All the 
+All the positions successively located in the same polygon are aggregated into one single position (i.e. polygon). All the 
 positions' attributes are averaged over the different positions. The time spent into the polygon is equal to the ellapsed between the 
 arrival time and departure time from the polygon. The arrival time is approximated by the time between the first position in the polygon 
-and the previous one.The departure time is approximated by the time between the last position in the polygon and the next one. 
+and the previous one. The departure time is approximated by the time between the last position in the polygon and the next one. 
 
 The algorithm takes as input a 8 columns csv file with column names (the value separator is a semicolon ";"). Each row of the file 
-represents a spatio-temporal position of a vessel's trajectory. 
+represents a spatio-temporal position of a vessel's trip. 
 
 It is important to note that the table must be SORTED by Trip ID and by time, and each trip should be composed of at least 3 positions. 
  
@@ -26,9 +26,9 @@ It is important to note that the table must be SORTED by Trip ID and by time, an
 	6. Speed (in meter/second)
 	7. Simplified: 1 if the position is on a simplified trip
                      0 otherwise
-	8. ID polygon                    
+	8. Polygon ID                    
  
-The algorithm has 5 parameters:
+The algorithm has 2 parameters:
 
 	1. wdinput:  Path of the input file
 	2. wdoutput: Path of the output file
@@ -38,7 +38,7 @@ a spatio-temporal aggregate position of a vessel's simplified trip.
 
 
 	1. Trip ID
-	2. ID polygon  
+	2. Polygon ID  
 	3. Unix Time
 	4. X cartesian coordinate (in meters)
 	5. Y cartesian coordinate (in meters)
