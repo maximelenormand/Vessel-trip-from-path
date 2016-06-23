@@ -1,4 +1,4 @@
-Spatio-temporal aggregation of vessels' trips
+Spatial aggregation of vessels' trips
 ========================================================================
 
  Copyright 2016 Maxime Lenormand. All rights reserved. Code under License GPLv3.
@@ -6,9 +6,9 @@ ________________________________________________________________________________
 
 ## Description
 
-The aim of this script is to spatially aggregate a vessel trip over a spatial distribution of polygons according to a simplified trajectory. A trip is composed of exact spatio-temporal positions (T, X, Y) spatially included in a spatial polygon. A trip can also be simplified with a Ramer–Douglas–Peucker algorithm for example. In this case only polygons containing at least one position in the simplified trip will be considered.  
- 
-All the positions successively located in the same polygon are aggregated into one single aggregate position (i.e. polygon). All the positions' attributes are averaged over the different positions. The time spent into the polygon is equal to the ellapsed between the arrival time and departure time from the polygon. The arrival time is approximated by the time between the first position in the polygon and the previous one. The departure time is approximated by the time between the last position in the polygon and the next one. 
+The aim of this script is to spatially aggregate a vessel trip over a spatial distribution of polygons according to a simplified trip. A trip is composed of exact spatio-temporal positions (T, X, Y) spatially included in a spatial polygon. A trip can also be simplified with a Ramer–Douglas–Peucker algorithm for example. In this case only polygons containing at least one position in the simplified trip will be considered.  
+
+All the positions successively located in the same polygon are aggregated in order to obtain an aggregate position characterized by time, geographical coordinates and speed averaged over the successive records. The time spent into the polygon is equal to the time elapsed between the arrival time and departure time from the polygon. The arrival time is approximated by the time between the first position in the polygon and the previous one. The departure time is approximated by the time between the last position in the polygon and the next one. 
 
 ## Input
 
@@ -21,7 +21,7 @@ It is important to note that the table must be SORTED by Trip ID and by time, ea
 3. **X:** cartesian coordinate (in meters)
 4. **Y:** cartesian coordinate (in meters)
 5. **DistLand:** Distance from the nearest land (in meters) 
-6. **Speed** (in meter/second)
+6. **Speed** 
 7. **Simplified:** 1 if the position is on a simplified trip, 0 otherwise
 8. **Polygon ID**
 
