@@ -1,4 +1,4 @@
-Extract and aggregate fishing trips from spatio-temporal vessels' trajectories
+Extract and aggregate fishing trips from spatio-temporal vessels' paths
 ========================================================================
 
  Copyright 2016 Maxime Lenormand. All rights reserved. Code under License GPLv3.
@@ -6,7 +6,7 @@ ________________________________________________________________________________
 
 ## Description
 
-This repository proposes two scripts, ***ExtractTrips.py*** and ***SpatioTemporalAggregation.py***, to extract and aggregate trips from spatio-temporal vessels' trajectories.
+This repository proposes two scripts, ***ExtractTrips.py*** and ***SpatialAggregation.py***, to extract and aggregate trips from spatio-temporal vessels' path.
 
 ## Execution
 
