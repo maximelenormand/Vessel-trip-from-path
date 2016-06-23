@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 
 """
-Spatio-temporal aggregation of vessels' trips
+Spatial aggregation of vessels' trips
 
 The aim of this script is to spatially aggregate a vessel trip over a spatial distribution of polygons according to a simplified 
-trajectory. A trip is composed of exact spatio-temporal positions (T, X, Y) spatially included in a spatial polygon. A trip can also 
+trip. A trip is composed of exact spatio-temporal positions (T, X, Y) spatially included in a spatial polygon. A trip can also 
 be simplified with a Ramer–Douglas–Peucker algorithm for example. In this case only polygons containing at least one position in the 
 simplified trip will be considered.  
- 
-All the positions successively located in the same polygon are aggregated into one single position (i.e. polygon). All the 
-positions' attributes are averaged over the different positions. The time spent into the polygon is equal to the ellapsed between the 
+
+All the positions successively located in the same polygon are aggregated in order to obtain an aggregate position characterized by time, 
+geographical coordinates and speed averaged over the successive records. The time spent into the polygon is equal to the time elapsed between the 
 arrival time and departure time from the polygon. The arrival time is approximated by the time between the first position in the polygon 
 and the previous one. The departure time is approximated by the time between the last position in the polygon and the next one. 
 
@@ -23,7 +23,7 @@ It is important to note that the table must be SORTED by Trip ID and by time, an
 	3. X cartesian coordinate (in meters)
 	4. Y cartesian coordinate (in meters)
 	5. DistLand: Distance from the nearest land (in meters)
-	6. Speed (in meter/second)
+	6. Speed 
 	7. Simplified: 1 if the position is on a simplified trip
                      0 otherwise
 	8. Polygon ID                    
@@ -45,7 +45,7 @@ a spatio-temporal aggregate position of a vessel's simplified trip.
 	6. DistLand: Distance from the nearest land (in meters)
 	7. Delta_t: Time ellapsed between the last and the current aggregate position (in seconds)
 	8. Delta_d: Distance traveled between the last and the current aggregate position (in meters)
-	9. Theta: Turning angle based on the change of direction between the last, the current and the next aggregate position (in degree). 
+	9. Theta: Angle between the last, the current and the next aggregate position (in degree). 
                 Negative for left and positive for right.
 	10. Time: Time spent in the polygon (in seconds)                
 
@@ -112,7 +112,7 @@ output_file.write(';')
 output_file.write('Time')
 output_file.write('\n')
 
-#Firstline of the vessel trajectory 
+#Firstline of the vessel trip 
 firstline = True
 
 #Looping through the file line by line
@@ -176,7 +176,7 @@ for line in input_file:
            mint = maxT[-1]
            maxT[-1] = maxT[-1] + (time - maxT[-1]) / 2
            
-           #Remove last position if not in the simplified trajectory
+           #Remove last position if not in the simplified trip
            if muSi[-1] == 0:
                muT = muT[:-1]
                minT = minT[:-1]
