@@ -36,7 +36,7 @@ The algorithm has 5 parameters:
 
 ## Output
 
-The algorithm returns a 9 columns csv file with column names, **the value separator is a semicolon ";"**. 
+The algorithm returns a 10 columns csv file with column names, **the value separator is a semicolon ";"**. 
 
 1. **ID of the vessel**
 2. **ID of the trip**
