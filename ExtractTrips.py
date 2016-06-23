@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
 
 """
-Extract trips from spatio-temporal vessels' trajectories
+Extract trips from spatio-temporal vessels' paths
 
-This script divides spatio-temporal vessels's trajectories into trips based on the following definition:
+This script divides spatio-temporal vessels's paths (i.e. collection of spatio-temporal positions sorted by time) into trips based on 
+the following definition:
 
-"A trip is composed of at least three successive positions being farther than thd meters from the coast 
+"A trip is composed of at least three successive spatio-temporal positions being farther than thd meters from the coast 
 and separated by inverevent times lower than tht seconds."
 
 The algorithm takes as input a 5 columns csv file with column names (the value separator is a semicolon ";").
-Each row of the file represents a spatio-temporal position of a vessel's trajectory. 
+Each row of the file represents a spatio-temporal position of a vessel's path. 
 
 It is important to note that the table must be SORTED by ID and by time.
  
@@ -25,7 +26,7 @@ The algorithm has 5 parameters:
 	2. wdoutput: Path of the output file
 	3. thd: Distance threshold (in meters)
 	4. tht: Time threshold (in seconds)
-	5. epsilon: maximum distance (in meters) between the simplified trajectory and the original one (Ramer–Douglas–Peucker algorithm)
+	5. epsilon: Maximum distance (in km) between the simplified path and the original one (Ramer–Douglas–Peucker algorithm)
 
 The algorithm returns a 10 columns csv file with column names (the value separator is a semicolon ";"). 
 
@@ -37,9 +38,9 @@ The algorithm returns a 10 columns csv file with column names (the value separat
 	6. DistLand: Distance from the nearest land (in meters)
 	7. Delta_t: Time ellapsed between the last and the current position (in seconds)
 	8. Delta_d: Distance traveled between the last and the current position (in meters)
-	9. Theta: Turning angle based on the change of direction between the last, the current and the next position (in degree). 
+	9. Theta: Angle between the last, the current and the next position (in degree). 
                 Negative for left and positive for right.
-	10. Simplified: 1 if the position is on the simplified trajectory (Ramer–Douglas–Peucker algorithm)
+	10. Simplified: 1 if the position is on the simplified trip (Ramer–Douglas–Peucker algorithm)
                       0 otherwise                
 
 Copyright 2016 Maxime Lenormand. All rights reserved. Code under License GPLv3.
@@ -80,8 +81,8 @@ def distpointline(x0, y0, x1, y1, x2, y2):
 
 #Ramer–Douglas–Peucker algorithm 
 #Input: X, Y (two lists of cartesian coordinates in meters) and 
-#       epsilon (maximum distance (in meters) between the simplified trajectory and the original one)
-#Ouptu: S a list of length X giving for each position 1 if it is in the simplified trajectory and 0 otherwise    
+#       epsilon (maximum distance (in meters) between the simplified trip and the original one)
+#Ouptu: S a list of length X giving for each position 1 if it is in the simplified trip and 0 otherwise    
 def RDP(X, Y, epsilon):
     
     n = len(X)
@@ -144,7 +145,7 @@ output_file.write(';')
 output_file.write('Simplified')
 output_file.write('\n')
 
-#Firstline of the vessel trajectory 
+#Firstline of the vessel path 
 firstline = True
 
 #Looping through the file line by line
@@ -166,22 +167,22 @@ for line in input_file:
         attr = next(input_file2).rstrip('\n\r').split(';')
         ID_next = attr[0]                                         #Vessel ID                                   
     except(StopIteration):
-        ID_next = ID + "last"                                #Fake ID if last line
+        ID_next = ID + "last"                                     #Fake ID if last line
     
     #IF first vessel's position 
     #THEN initialize variables    
     if firstline:
         
         IDtrip = 0                       #ID trip        
-        time_old = 0                     #Unix Time previous location 
-        x_old = 0.0                      #X cartesian coordinate previous location 
-        y_old = 0.0                      #Y cartesian coordinate previous location
-        land_old = 0.0                   #Distance to land previous location 
+        time_old = 0                     #Unix Time previous position 
+        x_old = 0.0                      #X cartesian coordinate previous position 
+        y_old = 0.0                      #Y cartesian coordinate previous position
+        land_old = 0.0                   #Distance to land previous position
         
-        test_t = True                    #Test interevent time between current and last location lower than tht
-        test_d = True                    #Test distance to land lower than thd
-        test_t_old = False               #Test interevent time between last and last last location lower than tht
-        test_d_old = (land > thd)        #Test distance to land previous location lower than thd
+        test_t = True                    #Test if interevent time between current and last position is lower than tht
+        test_d = True                    #Test if distance to land is lower than thd
+        test_t_old = False               #Test if interevent time between the last and last last position is lower than tht
+        test_d_old = (land > thd)        #Test if distance to land of previous position is lower than thd
 
         #Trip
         T = []                           #Trip successive time
@@ -236,7 +237,7 @@ for line in input_file:
            #IF more than three positions (to compute the angle)
            if (len(T) > 2):
                
-               #Simplified trajectory with Ramer–Douglas–Peucker algorithm
+               #Simplified trip with Ramer–Douglas–Peucker algorithm
                S = RDP(X, Y, epsilon) 
                
                #ID trip
