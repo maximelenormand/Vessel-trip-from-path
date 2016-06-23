@@ -6,7 +6,7 @@ ________________________________________________________________________________
 
 ## Description
 
-This repository proposes two scripts, ***ExtractTrips.py*** and ***SpatialAggregation.py***, to extract and aggregate trips from spatio-temporal vessels' path.
+This repository proposes two scripts, ***ExtractTrips.py*** and ***SpatialAggregation.py***, to extract and aggregate trips from spatio-temporal vessels' paths.
 
 ## Execution
 
