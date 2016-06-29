@@ -12,11 +12,11 @@ This repository proposes two scripts, ***ExtractTrips.py*** and ***SpatialAggreg
 
 You can run the scripts using the command:
 
-*python ExtractTrips.py input.csv output.csv 4000 36000 300*
+**python ExtractTrips.py input.csv output.csv 4000 36000 300**
 
-or
+and
 
-*python SpatialAggregation.py input.csv output.csv*
+**python SpatialAggregation.py input.csv output.csv**
 
 ## Citation
 
