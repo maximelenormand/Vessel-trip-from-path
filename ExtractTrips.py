@@ -43,7 +43,7 @@ The algorithm returns a 10 columns csv file with column names (the value separat
 	10. Simplified: 1 if the position is on the simplified trip (Ramer–Douglas–Peucker algorithm)
                       0 otherwise                
 
-Copyright 2016 Maxime Lenormand. All rights reserved. Code under License GPLv3.
+Author: Maxime Lenormand (2016)
 """
 
 # ****************************** IMPORTS **********************************************************************************************
