@@ -1,9 +1,6 @@
 Extract trips from spatio-temporal vessels' paths
 ========================================================================
 
- Copyright 2016 Maxime Lenormand. All rights reserved. Code under License GPLv3.
-______________________________________________________________________________________
-
 ## Description
 
 This script divides spatio-temporal vessels's paths (i.e. collection of spatio-temporal positions sorted by time) into trips based on the following definition:
