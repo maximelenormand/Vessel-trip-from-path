@@ -49,7 +49,7 @@ a spatio-temporal aggregate position of a vessel's simplified trip.
                 Negative for left and positive for right.
 	10. Time: Time spent in the polygon (in seconds)                
 
-Copyright 2016 Maxime Lenormand. All rights reserved. Code under License GPLv3.
+Author: Maxime Lenormand (2016)
 """
 
 # ****************************** IMPORTS **************************************************************************************************
