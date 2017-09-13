@@ -1,9 +1,6 @@
 Extract and aggregate trips from spatio-temporal vessels' paths
 ========================================================================
 
- Copyright 2016 Maxime Lenormand. All rights reserved. Code under License GPLv3.
-______________________________________________________________________________________
-
 ## Description
 
 This repository proposes two scripts, ***ExtractTrips.py*** and ***SpatialAggregation.py***, to extract and aggregate trips from spatio-temporal vessels' paths.
