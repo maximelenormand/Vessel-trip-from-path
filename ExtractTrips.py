@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Extract trips from spatio-temporal vessels' paths
+Extract trips from spatio-temporal vessel paths
 
 This script divides spatio-temporal vessels's paths (i.e. collection of spatio-temporal positions sorted by time) into trips based on 
 the following definition:

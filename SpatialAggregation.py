@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Spatial aggregation of vessels' trips
+Spatial aggregation of vessel trips
 
 The aim of this script is to spatially aggregate a vessel trip over a spatial distribution of polygons according to a simplified 
 trip. A trip is composed of exact spatio-temporal positions (T, X, Y) spatially included in a spatial polygon. A trip can also 
